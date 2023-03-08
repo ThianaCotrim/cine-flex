@@ -1,25 +1,22 @@
 import styled from "styled-components"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function HomePage() {
 
     const [imagens, setImagens] = useState ([])
-    const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+
+    useEffect(() => {const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
 
     const promisse = axios.get(url)
 
     promisse.then((res) => {
         console.log(res.data)
         setImagens(res.data)
-
     })
-
     promisse.catch((err) => {
         console.log(err.response.data)
-
-    })
-
+    })}, [])
 
     return (
         <PageContainer>
@@ -30,12 +27,7 @@ export default function HomePage() {
                 <MovieContainer>
                 <img src={r.posterURL} alt="poster"/>
                 </MovieContainer>
-
                 ))}
-                
-
-                
-
             </ListContainer>
 
         </PageContainer>
