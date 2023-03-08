@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+
 
 export default function HomePage() {
 
@@ -18,14 +20,23 @@ export default function HomePage() {
         console.log(err.response.data)
     })}, [])
 
+    if (imagens.length === 0) {
+        return (
+            <div> CARREGANDO....</div>
+        )
+    }
+    
     return (
         <PageContainer>
             Selecione o filme
 
-            <ListContainer>
+            <ListContainer >
                 {imagens.map((r) => (
-                <MovieContainer>
-                <img src={r.posterURL} alt="poster"/>
+                <MovieContainer key={r.id}>
+                    <Link to="/sessoes/:idFilme">
+                    <img src={r.posterURL} alt="poster"/>
+                    </Link>
+                
                 </MovieContainer>
                 ))}
             </ListContainer>
