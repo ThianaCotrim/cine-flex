@@ -7,6 +7,8 @@ export default function SeatsPage() {
 
     const [assentos, setAssentos] = useState ()
     const [fotoetexto, setFotoetexto] = useState()
+    const [hora, setHora] = useState()
+    const [dia, setDia] = useState()
 
     const {idSessao} = useParams()
 
@@ -16,11 +18,15 @@ export default function SeatsPage() {
 
         const promise = axios.get(url)
 
-        promise.then(res => (setAssentos(res.data.seats)) (setFotoetexto(res.data.movie)))
+        promise.then((res) => {
+            setFotoetexto(res.data.movie)
+            setAssentos(res.data.seats)
+            setHora(res.data)
+            setDia(res.data.day)
+        })
         promise.catch(err => console.log(err.response.data))
 
-
-    }, [])
+    } , [])
     
   if (assentos === undefined){
     return <div>carregando...</div>
@@ -30,7 +36,6 @@ export default function SeatsPage() {
     return (
         <PageContainer>
             Selecione o(s) assento(s)
-            
           
             <SeatsContainer>
             {assentos.map((h) => (
@@ -72,7 +77,7 @@ export default function SeatsPage() {
                 </div>
                 <div>
                     <p>{fotoetexto.title}</p>
-                    <p>Sexta - 14h00</p>
+                    <p>{dia.weekday}- {hora.name}</p>
                 </div>
             </FooterContainer>
 
