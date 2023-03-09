@@ -1,14 +1,16 @@
 import styled from "styled-components"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState} from "react"
 import { Link } from "react-router-dom"
 
 
 export default function HomePage() {
 
-    const [imagens, setImagens] = useState ([])
+    const [imagens, setImagens] = useState([])
 
-    useEffect(() => {const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+    useEffect(() => {
+    
+    const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
 
     const promisse = axios.get(url)
 
@@ -33,7 +35,7 @@ export default function HomePage() {
             <ListContainer >
                 {imagens.map((r) => (
                 <MovieContainer key={r.id}>
-                    <Link to="/sessoes/:idFilme">
+                    <Link to={`/sessoes/${r.id}`}>
                     <img src={r.posterURL} alt="poster"/>
                     </Link>
                 
