@@ -15,7 +15,7 @@ export default function SeatsPage() {
 
         const promise = axios.get(url)
 
-        promise.then(res => (setAssentos(res.data.seats)) (console.log(res.data.seats)))
+        promise.then(res => (setAssentos(res.data.seats)))
         promise.catch(err => console.log(err.response.data))
 
 

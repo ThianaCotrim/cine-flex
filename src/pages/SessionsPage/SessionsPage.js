@@ -36,10 +36,10 @@ export default function SessionsPage() {
                         <ButtonsContainer>
                             {h.showtimes.map(hora => (
                                 <>
-                                    <Link to="/assentos/:idSessao">
+                                    <Link to={`/assentos/${hora.id}`}>
                                         <button>{hora.name}</button>
                                     </Link>
-                                    <Link to="/assentos/:idSessao">
+                                    <Link to={`/assentos/${hora.id}`}>
                                         <button>{hora.name}</button>
                                     </Link>
                                 </>
