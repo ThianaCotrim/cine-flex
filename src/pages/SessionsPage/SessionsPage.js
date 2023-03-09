@@ -4,7 +4,7 @@ import {useEffect, useState} from "react"
 import axios from "axios"
 
 export default function SessionsPage() {
-    const[sessao, setSessao] = useState (undefined)
+    const [sessao, setSessao] = useState (undefined)
     const [dias, setDias] = useState([])
 
    const {idFilme} = useParams()
