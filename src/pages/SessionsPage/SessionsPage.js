@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import { Link, useParams} from "react-router-dom"
-
 import {useEffect, useState} from "react"
 import axios from "axios"
 
 export default function SessionsPage() {
     const[sessao, setSessao] = useState (undefined)
+    const [dias, setDias] = useState([])
 
    const {idFilme} = useParams()
    
@@ -14,94 +14,42 @@ export default function SessionsPage() {
     const url = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`
 
     const promise = axios.get(url)
-
-    promise.then(res => (setSessao(res.data)))
-    promise.catch(err => console.log(err.response.data))
     
+
+    promise.then(res => (setSessao(res.data)) (setDias(res.data.days)))
+    promise.catch(err => console.log(err.response.data))
+  
    }, [])
- 
-//    useEffect(() => {
 
-//     const url = `https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}`
-
-//     const promisse = axios.get(url)
-//     promisse.then(res => console.log(res.data.days))
-//     promisse.catch(err => console.log(err.response.data))
-
-
-//    }, [])
 
    if (sessao === undefined) {
     return (
-        <div> CARREGANDO....</div>
-    )
-}
-
-    // const [sessao, setSessao] = useState ()
-
-    //     useEffect( () => {
-
-    //         const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies/ID_DO_FILME/showtimes"
-
-    //         const promisse = axios.get(url)
-        
-    //         promisse.then((res) => {
-    //             console.log(res.data)
-                
-    //         })
-
-    //         promisse.cath((err) => {
-    //             console.log(err.responde.data)
-                
-    //         })
-
-
-
-    //     })
-    
+        <div> CARREGANDO....</div>)}
 
     return (
-        <PageContainer>
+       <PageContainer>
             Selecione o horário
             <div>
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                        <Link to="/assentos/:idSessao">
-                        <button>14:00</button>
-                        </Link>
-                        <Link to="/assentos/:idSessao">
-                        <button>15:00</button>
-                        </Link>
-                        
-                    </ButtonsContainer>
-                </SessionContainer>
+                {dias.map((h) => (
+                    <SessionContainer>
+                        {h.weekday} - {h.date}
+                        <ButtonsContainer>
+                            {h.showtimes.map(hora => (
+                                <>
+                                    <Link to="/assentos/:idSessao">
+                                        <button>{hora.name}</button>
+                                    </Link>
+                                    <Link to="/assentos/:idSessao">
+                                        <button>{hora.name}</button>
+                                    </Link>
+                                </>
+                            )
+                            )}
 
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                    <Link to="/assentos/:idSessao">
-                        <button>14:00</button>
-                        </Link>
-                        <Link to="/assentos/:idSessao">
-                        <button>15:00</button>
-                        </Link>
-                    </ButtonsContainer>
-                </SessionContainer>
-
-                <SessionContainer>
-                    Sexta - 03/03/2023
-                    <ButtonsContainer>
-                    <Link to="/assentos/:idSessao">
-                        <button>14:00</button>
-                        </Link>
-                        <Link to="/assentos/:idSessao">
-                        <button>15:00</button>
-                        </Link>
-                    </ButtonsContainer>
-                </SessionContainer>
+                        </ButtonsContainer>
+                    </SessionContainer>
+                ))}
             </div>
-
             <FooterContainer>
                 <div>
                     <img src={sessao.posterURL} alt="poster" />
