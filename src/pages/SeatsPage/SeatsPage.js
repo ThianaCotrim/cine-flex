@@ -5,7 +5,7 @@ import axios from "axios"
 
 export default function SeatsPage() {
 
-    const [assentos, setAssentos] = useState (undefined)
+    const [assentos, setAssentos] = useState ()
 
     const {idSessao} = useParams()
 
@@ -29,12 +29,14 @@ export default function SeatsPage() {
     return (
         <PageContainer>
             Selecione o(s) assento(s)
-
-            {assentos.map((h) => (
+            
+          
             <SeatsContainer>
+            {assentos.map((h) => (
                 <SeatItem>{h.name}</SeatItem>
+                ))} 
             </SeatsContainer>
-           ))}
+
             <CaptionContainer>
                 <CaptionItem>
                     <CaptionCircle />
