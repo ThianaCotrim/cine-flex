@@ -6,6 +6,7 @@ import axios from "axios"
 export default function SeatsPage() {
 
     const [assentos, setAssentos] = useState ()
+    const [fotoetexto, setFotoetexto] = useState()
 
     const {idSessao} = useParams()
 
@@ -15,7 +16,7 @@ export default function SeatsPage() {
 
         const promise = axios.get(url)
 
-        promise.then(res => (setAssentos(res.data.seats)))
+        promise.then(res => (setAssentos(res.data.seats)) (setFotoetexto(res.data.movie)))
         promise.catch(err => console.log(err.response.data))
 
 
@@ -67,10 +68,10 @@ export default function SeatsPage() {
 
             <FooterContainer>
                 <div>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster" />
+                    <img src={fotoetexto.posterURL} alt="poster" />
                 </div>
                 <div>
-                    <p>Tudo em todo lugar ao mesmo tempo</p>
+                    <p>{fotoetexto.title}</p>
                     <p>Sexta - 14h00</p>
                 </div>
             </FooterContainer>
