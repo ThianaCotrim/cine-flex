@@ -39,9 +39,6 @@ export default function SessionsPage() {
                                     <Link to={`/assentos/${hora.id}`}>
                                         <button>{hora.name}</button>
                                     </Link>
-                                    <Link to={`/assentos/${hora.id}`}>
-                                        <button>{hora.name}</button>
-                                    </Link>
                                 </>
                             )
                             )}
