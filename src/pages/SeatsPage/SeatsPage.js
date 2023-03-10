@@ -5,37 +5,27 @@ import axios from "axios"
 
 export default function SeatsPage() {
 
-    const [testeum, setTesteum] = useState('')
-
-    // const [name, setName] = useState()
-    // const [cpf, setCpf] = useState()
-
-    function reservarAssento (e) {
-        setTesteum(e.target.value);
-
-        // e.preventDefault()
-
-    //         const urlReserva = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
-    //         const cadeira = {name, cpf}
-
-    //         const promise = axios.post(urlReserva, cadeira)
-
-    //         promise.then(res => alert('sua cadeira foi reservada'))
-    //         promise.catch(err => alert ('Deu erro, não foi reservado'))
-    // 
-}
-
-    // const [trocarCor, setTrocarCor] = useState(true)
+    const [selecionado, setSelecionado] = useState([])
     
-    // function click () {
-    //     setTrocarCor(prevState => !prevState)
-    // }
+    function click (id, isAvailable) {
+       
+      if (!isAvailable){
+        alert('O Assento não está disponível')
+      } else {
+        setSelecionado((teste) => {
+            if (teste.includes(id)) {
+                return teste.filter((teste) => teste !== id);
+            }
+            else  {
+                return [...teste, id]
+            }
+        })} 
+    }
 
     const [assentos, setAssentos] = useState ()
     const [fotoetexto, setFotoetexto] = useState()
     const [hora, setHora] = useState()
     const [dia, setDia] = useState()
-
 
     const {idSessao} = useParams()
 
@@ -60,18 +50,18 @@ export default function SeatsPage() {
     return <div>carregando...</div>
   }
 
- 
-
     return (
         <PageContainer>
             Selecione o(s) assento(s)
           
             <SeatsContainer >
-            {assentos.map(({name, isAvailable}) => (
-                <SeatItem isAvailable={isAvailable} > {name} </SeatItem>
+            {assentos.map(({id, name, isAvailable}) => (
+                <SeatItem isAvailable={isAvailable}
+                 id={id} 
+                 select={selecionado.includes(id)}
+                 onClick={() => click(id, isAvailable)}> {name} </SeatItem>
                 ))} 
             </SeatsContainer>
-
             <CaptionContainer>
                 <CaptionItem>
                     <CaptionCircle/>
@@ -87,31 +77,18 @@ export default function SeatsPage() {
                 </CaptionItem>
             </CaptionContainer>
 
-            <form onSubmit={reservarAssento}>
+            <form>
             <FormContainer htmlFor="name" >
                 Nome do Comprador:
-                <input 
-                // id="name" 
-                placeholder="Digite seu nome..."
-                // value={name}
-                // onChange={e => setName(e.target.value)} 
-                onChange={reservarAssento}
-                value={testeum}
+                <input placeholder="Digite seu nome..."
                 />
                 </FormContainer>
                 <FormContainer htmlFor="cpf"
                 >
                 CPF do Comprador:
-                <input 
-                id="cpf" 
-                placeholder="Digite seu CPF..."
-                // value={cpf}
-                // onChange={e => setCpf(e.target.value)} 
-                onChange={reservarAssento}
-                value={testeum}
+                <input id="cpf" placeholder="Digite seu CPF..."
                 />
-
-                <Link to={`/sucesso/${hora.id}`} testeum={testeum}>
+                <Link to={`/sucesso/${hora.id}`}>
                 <button type="submit" >Reservar Assento(s)</button>
                 </Link>
             </FormContainer>
@@ -130,8 +107,6 @@ export default function SeatsPage() {
         </PageContainer>
     )
 }
-// style={{ backgroundColor: trocarCor ? 'lightblue' : '#1AAE9E' }}
-
 
 const PageContainer = styled.div`
     display: flex;
@@ -197,8 +172,8 @@ const CaptionItem = styled.div`
     
 `
 const SeatItem = styled.div`
-    border: 1px solid blue;         // Essa cor deve mudar
-    background-color: ${({ isAvailable}) => isAvailable ? "#C3CFD9" : "#FBE192"};    // Essa cor deve mudar
+    border: 1px solid ${({isAvailable, select}) => select ? "#0E7D71" : isAvailable ? "#808F9D" : "#FBE192"};         // Essa cor deve mudar
+    background-color: ${({ isAvailable, select}) => select ? "#1AAE9E" : isAvailable ? "#C3CFD9" : "#FBE192"};    // Essa cor deve mudar
     height: 25px;
     width: 25px;
     border-radius: 25px;
