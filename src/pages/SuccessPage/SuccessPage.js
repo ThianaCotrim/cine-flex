@@ -4,7 +4,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export default function SuccessPage() {
+export default function SuccessPage(props) {
 
     const [teste, setTeste] = useState()
     const [testeDois, setTesteDois] = useState()
@@ -48,7 +48,7 @@ export default function SuccessPage() {
 
             <TextContainer>
                 <strong><p>Comprador</p></strong>
-                <p>Nome: Letícia Chijo</p>
+                <p>Nome: {props.testeum}</p>
                 <p>CPF: 123.456.789-10</p>
             </TextContainer>
             <Link to="/">

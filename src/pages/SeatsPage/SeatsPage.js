@@ -5,10 +5,37 @@ import axios from "axios"
 
 export default function SeatsPage() {
 
+    const [testeum, setTesteum] = useState('')
+
+    // const [name, setName] = useState()
+    // const [cpf, setCpf] = useState()
+
+    function reservarAssento (e) {
+        setTesteum(e.target.value);
+
+        // e.preventDefault()
+
+    //         const urlReserva = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+    //         const cadeira = {name, cpf}
+
+    //         const promise = axios.post(urlReserva, cadeira)
+
+    //         promise.then(res => alert('sua cadeira foi reservada'))
+    //         promise.catch(err => alert ('Deu erro, não foi reservado'))
+    // 
+}
+
+    // const [trocarCor, setTrocarCor] = useState(true)
+    
+    // function click () {
+    //     setTrocarCor(prevState => !prevState)
+    // }
+
     const [assentos, setAssentos] = useState ()
     const [fotoetexto, setFotoetexto] = useState()
     const [hora, setHora] = useState()
     const [dia, setDia] = useState()
+
 
     const {idSessao} = useParams()
 
@@ -23,6 +50,7 @@ export default function SeatsPage() {
             setAssentos(res.data.seats)
             setHora(res.data)
             setDia(res.data.day)
+            console.log(res.data.seats)
         })
         promise.catch(err => console.log(err.response.data))
 
@@ -32,20 +60,21 @@ export default function SeatsPage() {
     return <div>carregando...</div>
   }
 
+ 
 
     return (
         <PageContainer>
             Selecione o(s) assento(s)
           
-            <SeatsContainer>
-            {assentos.map((h) => (
-                <SeatItem>{h.name}</SeatItem>
+            <SeatsContainer >
+            {assentos.map(({name, isAvailable}) => (
+                <SeatItem isAvailable={isAvailable} > {name} </SeatItem>
                 ))} 
             </SeatsContainer>
 
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircle />
+                    <CaptionCircle/>
                     Selecionado
                 </CaptionItem>
                 <CaptionItem>
@@ -53,23 +82,40 @@ export default function SeatsPage() {
                     Disponível
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle />
+                    <CaptionCircle/>
                     Indisponível
                 </CaptionItem>
             </CaptionContainer>
 
-            <FormContainer>
+            <form onSubmit={reservarAssento}>
+            <FormContainer htmlFor="name" >
                 Nome do Comprador:
-                <input placeholder="Digite seu nome..." />
-
+                <input 
+                // id="name" 
+                placeholder="Digite seu nome..."
+                // value={name}
+                // onChange={e => setName(e.target.value)} 
+                onChange={reservarAssento}
+                value={testeum}
+                />
+                </FormContainer>
+                <FormContainer htmlFor="cpf"
+                >
                 CPF do Comprador:
-                <input placeholder="Digite seu CPF..." />
+                <input 
+                id="cpf" 
+                placeholder="Digite seu CPF..."
+                // value={cpf}
+                // onChange={e => setCpf(e.target.value)} 
+                onChange={reservarAssento}
+                value={testeum}
+                />
 
-                <Link to={`/sucesso/${hora.id}`}>
-                <button>Reservar Assento(s)</button>
+                <Link to={`/sucesso/${hora.id}`} testeum={testeum}>
+                <button type="submit" >Reservar Assento(s)</button>
                 </Link>
-                
             </FormContainer>
+            </form>
 
             <FooterContainer>
                 <div>
@@ -84,6 +130,8 @@ export default function SeatsPage() {
         </PageContainer>
     )
 }
+// style={{ backgroundColor: trocarCor ? 'lightblue' : '#1AAE9E' }}
+
 
 const PageContainer = styled.div`
     display: flex;
@@ -108,7 +156,7 @@ const SeatsContainer = styled.div`
     justify-content: center;
     margin-top: 20px;
 `
-const FormContainer = styled.div`
+const FormContainer = styled.label`
     width: calc(100vw - 40px); 
     display: flex;
     flex-direction: column;
@@ -129,7 +177,7 @@ const CaptionContainer = styled.div`
     justify-content: space-between;
     margin: 20px;
 `
-const CaptionCircle = styled.div`
+const CaptionCircle= styled.div`
     border: 1px solid blue;         // Essa cor deve mudar
     background-color: lightblue;    // Essa cor deve mudar
     height: 25px;
@@ -140,15 +188,17 @@ const CaptionCircle = styled.div`
     justify-content: center;
     margin: 5px 3px;
 `
+
 const CaptionItem = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 12px;
+    
 `
 const SeatItem = styled.div`
     border: 1px solid blue;         // Essa cor deve mudar
-    background-color: lightblue;    // Essa cor deve mudar
+    background-color: ${({ isAvailable}) => isAvailable ? "#C3CFD9" : "#FBE192"};    // Essa cor deve mudar
     height: 25px;
     width: 25px;
     border-radius: 25px;
