@@ -1,7 +1,33 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import axios from "axios"
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 export default function SuccessPage() {
+
+    const [teste, setTeste] = useState()
+    const [testeDois, setTesteDois] = useState()
+    const [titulo, setTitulo] = useState()
+
+    const {idFinal} = useParams()
+
+    useEffect(() => {
+
+        const url = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idFinal}/seats`
+
+        const promise = axios.get(url)
+
+        promise.then((res) => {
+           setTeste(res.data.day.date)
+           setTesteDois(res.data.name)
+           setTitulo(res.data.movie.title)
+            
+         })
+          
+        promise.catch(err => console.log(err.response.data))
+
+    }, [])
 
     return (
         <PageContainer>
@@ -9,8 +35,8 @@ export default function SuccessPage() {
 
             <TextContainer>
                 <strong><p>Filme e sessão</p></strong>
-                <p>Tudo em todo lugar ao mesmo tempo</p>
-                <p>03/03/2023 - 14:00</p>
+                <p>{titulo}</p>
+                <p> {teste} - {testeDois}</p>
             </TextContainer>
 
             <TextContainer>
