@@ -48,7 +48,7 @@ export default function SuccessPage(props) {
 
             <TextContainer>
                 <strong><p>Comprador</p></strong>
-                <p>Nome: {props.testeum}</p>
+                <p>Nome: Leticia Digil</p>
                 <p>CPF: 123.456.789-10</p>
             </TextContainer>
             <Link to="/">

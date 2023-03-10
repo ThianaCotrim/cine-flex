@@ -64,15 +64,15 @@ export default function SeatsPage() {
             </SeatsContainer>
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircle/>
+                    <CaptionCircleSelecionado cor={'#1AAE9E'} border={"#0E7D71"}/>
                     Selecionado
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle />
+                    <CaptionCircleDisponivel cor={'#C3CFD9'} border={"#7B8B99"}/>
                     Disponível
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircle/>
+                    <CaptionCircleIndisponivel cor={'#FBE192'} border={"#F7C52B"}/>
                     Indisponível
                 </CaptionItem>
             </CaptionContainer>
@@ -152,9 +152,33 @@ const CaptionContainer = styled.div`
     justify-content: space-between;
     margin: 20px;
 `
-const CaptionCircle= styled.div`
-    border: 1px solid blue;         // Essa cor deve mudar
-    background-color: lightblue;    // Essa cor deve mudar
+const CaptionCircleSelecionado = styled.div`
+    border: 1px solid #0E7D71;         // Essa cor deve mudar
+    background-color: #1AAE9E;    // Essa cor deve mudar
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 3px;
+`
+
+const CaptionCircleDisponivel = styled.div`
+    border: 1px solid #7B8B99;         // Essa cor deve mudar
+    background-color: #C3CFD9;    // Essa cor deve mudar
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 3px;
+`
+
+const CaptionCircleIndisponivel = styled.div`
+    border: 1px solid #F7C52B;         // Essa cor deve mudar
+    background-color: #FBE192;    // Essa cor deve mudar
     height: 25px;
     width: 25px;
     border-radius: 25px;
@@ -172,7 +196,7 @@ const CaptionItem = styled.div`
     
 `
 const SeatItem = styled.div`
-    border: 1px solid ${({isAvailable, select}) => select ? "#0E7D71" : isAvailable ? "#808F9D" : "#FBE192"};         // Essa cor deve mudar
+    border: 1px solid ${({isAvailable, select}) => select ? "#0E7D71" : isAvailable ? "#808F9D" : "#F7C52B"};         // Essa cor deve mudar
     background-color: ${({ isAvailable, select}) => select ? "#1AAE9E" : isAvailable ? "#C3CFD9" : "#FBE192"};    // Essa cor deve mudar
     height: 25px;
     width: 25px;
