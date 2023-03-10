@@ -65,7 +65,7 @@ export default function SeatsPage() {
                 CPF do Comprador:
                 <input placeholder="Digite seu CPF..." />
 
-                <Link to="/sucesso">
+                <Link to={`/sucesso/${hora.id}`}>
                 <button>Reservar Assento(s)</button>
                 </Link>
                 
