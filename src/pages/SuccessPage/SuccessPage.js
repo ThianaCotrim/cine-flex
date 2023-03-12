@@ -1,10 +1,23 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export default function SuccessPage(props) {
+export default function SuccessPage({poltrona, setPoltrona}) {
+
+    const navigate = useNavigate()
+    const listaPoltrona = poltrona.map(assentos => {
+
+        return <p>Assento {assentos}</p>
+
+    })
+
+    function voltar (){
+       setPoltrona([])
+       navigate("/")
+
+    }
 
     const [teste, setTeste] = useState()
     const [testeDois, setTesteDois] = useState()
@@ -22,7 +35,6 @@ export default function SuccessPage(props) {
            setTeste(res.data.day.date)
            setTesteDois(res.data.name)
            setTitulo(res.data.movie.title)
-            
          })
           
         promise.catch(err => console.log(err.response.data))
@@ -41,9 +53,9 @@ export default function SuccessPage(props) {
 
             <TextContainer>
                 <strong><p>Ingressos</p></strong>
-                <p>Assento 01</p>
-                <p>Assento 02</p>
-                <p>Assento 03</p>
+               
+                {listaPoltrona}
+
             </TextContainer>
 
             <TextContainer>
@@ -52,7 +64,7 @@ export default function SuccessPage(props) {
                 <p>CPF: 123.456.789-10</p>
             </TextContainer>
             <Link to="/">
-            <button>Voltar para Home</button>
+            <button onClick={voltar}>Voltar para Home</button>
             </Link>
             
         </PageContainer>

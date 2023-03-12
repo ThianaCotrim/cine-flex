@@ -3,23 +3,34 @@ import { Link, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function SeatsPage() {
+export default function SeatsPage({poltrona, setPoltrona}) {
 
     const [selecionado, setSelecionado] = useState([])
     
-    function click (id, isAvailable) {
+    function click (id, isAvailable, name) {
        
       if (!isAvailable){
         alert('O Assento não está disponível')
       } else {
-        setSelecionado((teste) => {
-            if (teste.includes(id)) {
-                return teste.filter((teste) => teste !== id);
+        setSelecionado((t) => {
+            if (t.includes(id)) {
+                return t.filter((t) => t !== id);
             }
             else  {
+                return [...t, id]
+            }
+        })
+        setPoltrona((teste) => {
+            if (teste.includes(id)){
+                return teste.filter((teste) => teste !== id)
+
+            }
+            else {
                 return [...teste, id]
             }
-        })} 
+        })
+    
+    } 
     }
 
     const [assentos, setAssentos] = useState ()
@@ -64,15 +75,15 @@ export default function SeatsPage() {
             </SeatsContainer>
             <CaptionContainer>
                 <CaptionItem>
-                    <CaptionCircleSelecionado cor={'#1AAE9E'} border={"#0E7D71"}/>
+                    <CaptionCircleSelecionado/>
                     Selecionado
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircleDisponivel cor={'#C3CFD9'} border={"#7B8B99"}/>
+                    <CaptionCircleDisponivel/>
                     Disponível
                 </CaptionItem>
                 <CaptionItem>
-                    <CaptionCircleIndisponivel cor={'#FBE192'} border={"#F7C52B"}/>
+                    <CaptionCircleIndisponivel/>
                     Indisponível
                 </CaptionItem>
             </CaptionContainer>

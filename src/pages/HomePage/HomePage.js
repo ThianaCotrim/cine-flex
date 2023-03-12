@@ -25,8 +25,7 @@ export default function HomePage() {
     if (imagens.length === 0) {
         return (
             <div> CARREGANDO....</div>
-        )
-    }
+        )}
     
     return (
         <PageContainer>
