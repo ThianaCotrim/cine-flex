@@ -3,10 +3,9 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function SeatsPage({poltrona, setPoltrona}) {
+export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
 
-    const [nome, setNome] = useState("")
-    const [cpf, setCpf] = useState ("")
+  
 
     const [selecionado, setSelecionado] = useState([])
     const navigate = useNavigate()
@@ -47,6 +46,9 @@ export default function SeatsPage({poltrona, setPoltrona}) {
         promise.then(res => navigate("/sucesso"))
         promise.catch(err => console.log(err.responde.data))
     }
+
+
+
 
     const [assentos, setAssentos] = useState ()
     const [fotoetexto, setFotoetexto] = useState()
@@ -108,20 +110,20 @@ export default function SeatsPage({poltrona, setPoltrona}) {
             <form onSubmit={digitar}>
 
 
-                Nome do Comprador:
+               <label  htmlFor="name" >Nome do Comprador:</label> 
                 <input 
                     required
-                    htmlFor="name"
+                    name="name"
                     id="name"
                     type="text" 
                     value={nome} 
                     onChange={e => setNome(e.target.value)} 
                     placeholder="Digite seu nome..."/>
               
-                CPF do Comprador:
+              <label  htmlFor="cpf" >CPF do Comprador:</label> 
                 <input 
                     required
-                    htmlFor="cpf"
+                    name="cpf"
                     id="cpf"
                     value={cpf}
                     onChange={e => setCpf(e.target.value)}

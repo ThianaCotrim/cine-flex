@@ -6,12 +6,11 @@ import { useEffect, useState } from "react"
 
 export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome}) {
 
+    console.log(cpf)
+    console.log(nome)
     const navigate = useNavigate()
     const listaPoltrona = poltrona.map(assentos => {
-        console.log(assentos)
-
         return <p>Assento {assentos}</p>
-
     })
 
     function voltar (){
