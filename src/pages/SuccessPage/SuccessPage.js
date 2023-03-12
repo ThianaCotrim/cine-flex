@@ -4,10 +4,11 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export default function SuccessPage({poltrona, setPoltrona}) {
+export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome}) {
 
     const navigate = useNavigate()
     const listaPoltrona = poltrona.map(assentos => {
+        console.log(assentos)
 
         return <p>Assento {assentos}</p>
 
@@ -16,6 +17,8 @@ export default function SuccessPage({poltrona, setPoltrona}) {
     function voltar (){
        setPoltrona([])
        navigate("/")
+       setNome("")
+       setCpf ("")
 
     }
 
@@ -60,8 +63,8 @@ export default function SuccessPage({poltrona, setPoltrona}) {
 
             <TextContainer>
                 <strong><p>Comprador</p></strong>
-                <p>Nome: Leticia Digil</p>
-                <p>CPF: 123.456.789-10</p>
+                <p>Nome: {nome}</p>
+                <p>CPF: {cpf}</p>
             </TextContainer>
             <Link to="/">
             <button onClick={voltar}>Voltar para Home</button>

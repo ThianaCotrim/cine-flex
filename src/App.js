@@ -13,6 +13,8 @@ export default function App() {
 
 
     const [poltrona, setPoltrona] = useState([])
+    const [nome, setNome] = useState("")
+    const [cpf, setCpf] = useState ("")
     
     return (
         <BrowserRouter>
@@ -23,10 +25,18 @@ export default function App() {
             <Route path="/sessoes/:idFilme" element={<SessionsPage />}/>
             <Route path="/assentos/:idSessao" element={<SeatsPage 
             poltrona={poltrona}
-            setPoltrona={setPoltrona}/>}/>
+            setPoltrona={setPoltrona}/>}
+            nome={nome}
+            setNome={setNome}
+            cpf={cpf}
+            setCpf= {setCpf}/>
             <Route path="/sucesso/:idFinal" element={<SuccessPage 
             poltrona={poltrona}
-            setPoltrona={setPoltrona}/>}/>
+            setPoltrona={setPoltrona}
+            nome={nome}
+            setNome={setNome}
+            cpf={cpf}
+            setCpf= {setCpf}/>}/>
             </Routes>
         </BrowserRouter>
     ) 

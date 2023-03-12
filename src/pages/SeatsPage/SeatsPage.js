@@ -1,11 +1,15 @@
 import styled from "styled-components"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
 export default function SeatsPage({poltrona, setPoltrona}) {
 
+    const [nome, setNome] = useState("")
+    const [cpf, setCpf] = useState ("")
+
     const [selecionado, setSelecionado] = useState([])
+    const navigate = useNavigate()
     
     function click (id, isAvailable, name) {
        
@@ -21,16 +25,27 @@ export default function SeatsPage({poltrona, setPoltrona}) {
             }
         })
         setPoltrona((teste) => {
-            if (teste.includes(id)){
-                return teste.filter((teste) => teste !== id)
+            if (teste.includes(name)){
+                return teste.filter((teste) => teste !== name)
 
             }
             else {
-                return [...teste, id]
+                return [...teste, name]
             }
         })
     
     } 
+    }
+
+    function digitar (t) {
+        t.preventDefault();
+        const urlPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+        
+        const body = {ids: selecionado, name: nome, cpf: cpf};
+
+        const promise = axios.post(urlPost, body)
+        promise.then(res => navigate("/sucesso"))
+        promise.catch(err => console.log(err.responde.data))
     }
 
     const [assentos, setAssentos] = useState ()
@@ -70,7 +85,7 @@ export default function SeatsPage({poltrona, setPoltrona}) {
                 <SeatItem isAvailable={isAvailable}
                  id={id} 
                  select={selecionado.includes(id)}
-                 onClick={() => click(id, isAvailable)}> {name} </SeatItem>
+                 onClick={() => click(id, isAvailable, name)}> {name} </SeatItem>
                 ))} 
             </SeatsContainer>
             <CaptionContainer>
@@ -88,22 +103,37 @@ export default function SeatsPage({poltrona, setPoltrona}) {
                 </CaptionItem>
             </CaptionContainer>
 
-            <form>
-            <FormContainer htmlFor="name" >
+           
+            <FormContainer >
+            <form onSubmit={digitar}>
+
+
                 Nome do Comprador:
-                <input placeholder="Digite seu nome..."
-                />
-                </FormContainer>
-                <FormContainer htmlFor="cpf"
-                >
+                <input 
+                    required
+                    htmlFor="name"
+                    id="name"
+                    type="text" 
+                    value={nome} 
+                    onChange={e => setNome(e.target.value)} 
+                    placeholder="Digite seu nome..."/>
+              
                 CPF do Comprador:
-                <input id="cpf" placeholder="Digite seu CPF..."
-                />
+                <input 
+                    required
+                    htmlFor="cpf"
+                    id="cpf"
+                    value={cpf}
+                    onChange={e => setCpf(e.target.value)}
+                    placeholder="Digite seu CPF..."/>
+
+
                 <Link to={`/sucesso/${hora.id}`}>
-                <button type="submit" >Reservar Assento(s)</button>
+                <button>Reservar Assento(s)</button>
                 </Link>
+                </form>
             </FormContainer>
-            </form>
+          
 
             <FooterContainer>
                 <div>
