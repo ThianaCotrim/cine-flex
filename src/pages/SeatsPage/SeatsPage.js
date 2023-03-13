@@ -5,8 +5,6 @@ import axios from "axios"
 
 export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
 
-  
-
     const [selecionado, setSelecionado] = useState([])
     const navigate = useNavigate()
     
@@ -32,7 +30,6 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                 return [...teste, name]
             }
         })
-    
     } 
     }
 
@@ -46,9 +43,6 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
         promise.then(res => navigate("/sucesso"))
         promise.catch(err => console.log(err.responde.data))
     }
-
-
-
 
     const [assentos, setAssentos] = useState ()
     const [fotoetexto, setFotoetexto] = useState()
@@ -84,7 +78,9 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
           
             <SeatsContainer >
             {assentos.map(({id, name, isAvailable}) => (
-                <SeatItem isAvailable={isAvailable}
+                <SeatItem 
+                 data-test="seat"
+                 isAvailable={isAvailable}
                  id={id} 
                  select={selecionado.includes(id)}
                  onClick={() => click(id, isAvailable, name)}> {name} </SeatItem>
@@ -104,14 +100,12 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     Indisponível
                 </CaptionItem>
             </CaptionContainer>
-
-           
             <FormContainer >
-            <form onSubmit={digitar}>
+            <form onSubmit={digitar} data-test="book-seat-btn">
 
-
-               <label  htmlFor="name" >Nome do Comprador:</label> 
+               <Label htmlFor="name" >Nome do Comprador:</Label> 
                 <input 
+                    data-test="client-name" 
                     required
                     name="name"
                     id="name"
@@ -120,8 +114,9 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     onChange={e => setNome(e.target.value)} 
                     placeholder="Digite seu nome..."/>
               
-              <label  htmlFor="cpf" >CPF do Comprador:</label> 
+              <Label htmlFor="cpf" >CPF do Comprador:</Label> 
                 <input 
+                    data-test="client-cpf" 
                     required
                     name="cpf"
                     id="cpf"
@@ -129,15 +124,12 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     onChange={e => setCpf(e.target.value)}
                     placeholder="Digite seu CPF..."/>
 
-
                 <Link to={`/sucesso/${hora.id}`}>
                 <button>Reservar Assento(s)</button>
                 </Link>
                 </form>
             </FormContainer>
-          
-
-            <FooterContainer>
+            <FooterContainer data-test="footer">
                 <div>
                     <img src={fotoetexto.posterURL} alt="poster" />
                 </div>
@@ -146,7 +138,6 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     <p>{dia.weekday}- {hora.name}</p>
                 </div>
             </FooterContainer>
-
         </PageContainer>
     )
 }
@@ -288,4 +279,8 @@ const FooterContainer = styled.div`
             }
         }
     }
+`
+
+const Label = styled.label`
+margin: 1px;
 `

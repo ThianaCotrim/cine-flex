@@ -13,8 +13,6 @@ export default function App() {
     const [poltrona, setPoltrona] = useState([])
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState ("")
-    console.log(setNome)
-    console.log(setCpf)
     
     return (
         <BrowserRouter>
