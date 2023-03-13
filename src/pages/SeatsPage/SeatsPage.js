@@ -34,9 +34,9 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
     }
 
     function digitar (t) {
-        t.preventDefault();
-        const urlPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
         
+        const urlPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+        t.preventDefault();
         const body = {ids: selecionado, name: nome, cpf: cpf};
 
         const promise = axios.post(urlPost, body)
@@ -101,7 +101,7 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                 </CaptionItem>
             </CaptionContainer>
             <FormContainer >
-            <form onSubmit={digitar} data-test="book-seat-btn">
+            <form >
 
                <Label htmlFor="name" >Nome do Comprador:</Label> 
                 <input 
@@ -125,7 +125,7 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     placeholder="Digite seu CPF..."/>
 
                 <Link to={`/sucesso/${hora.id}`}>
-                <button>Reservar Assento(s)</button>
+                <button data-test="book-seat-btn" onClick={() => digitar} >Reservar Assento(s)</button>
                 </Link>
                 </form>
             </FormContainer>

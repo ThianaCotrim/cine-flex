@@ -6,14 +6,14 @@ import { useEffect, useState } from "react"
 
 export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome}) {
 
-    const nav = useNavigate()
+    const navegate = useNavigate()
     const listaPoltrona = poltrona.map(assentos => {
         return <p>Assento {assentos}</p>
     })
 
     function voltar (){
        setPoltrona([])
-       nav("/")
+       navegate("/")
        setNome("")
        setCpf ("")
     }
@@ -59,8 +59,8 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
                 <p>Nome: {nome}</p>
                 <p>CPF: {cpf}</p>
             </TextContainer>
-            <Link to="/">
-            <button data-test="go-home-btn" onClick={voltar}>Voltar para Home</button>
+            <Link data-test="go-home-btn" to="/">
+            <button  onClick={voltar}>Voltar para Home</button>
             </Link>
         </PageContainer>
     )
