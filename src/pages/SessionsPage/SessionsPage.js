@@ -19,8 +19,7 @@ export default function SessionsPage() {
     promise.then(res => {
         (setSessao(res.data))
         (setDias(res.data.days))
-
-    }  )
+    })
     promise.catch(err => console.log(err.response.data))
   
    }, [])
@@ -40,13 +39,11 @@ export default function SessionsPage() {
                         <ButtonsContainer>
                             {h.showtimes.map(hora => (
                                 <>
-                                    <Link to={`/assentos/${hora.id}`} data-test="showtime">
+                                    <Link to={`/assentos/${hora.id}`} key={hora.id} data-test="showtime">
                                         <button>{hora.name}</button>
                                     </Link>
                                 </>
-                            )
-                            )}
-
+                            ))}
                         </ButtonsContainer>
                     </SessionContainer>
                 ))}
@@ -61,8 +58,7 @@ export default function SessionsPage() {
             </FooterContainer>
 
         </PageContainer>
-    )
-}
+    )}
 
 const PageContainer = styled.div`
     display: flex;

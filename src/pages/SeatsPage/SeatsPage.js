@@ -81,6 +81,7 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf, hora
                  data-test="seat"
                  isAvailable={isAvailable}
                  id={id} 
+                 key={id}
                  select={selecionado.includes(id)}
                  onClick={() => click(id, isAvailable, name)}> {name} </SeatItem>
                 ))} 

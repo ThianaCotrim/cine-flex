@@ -1,14 +1,11 @@
 import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
-import { useParams } from "react-router-dom"
-import { useEffect } from "react"
 
 export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome, hora, fotoetexto}) {
 
     const navegate = useNavigate()
     const listaPoltrona = poltrona.map(assentos => {
-        return <p>Assento {assentos}</p>
+        return <p key={assentos} >Assento {assentos}</p>
     })
 
     function voltar (){
@@ -17,26 +14,6 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
        setNome("")
        setCpf ("")
     }
-
-  
-
-    const {idFinal} = useParams()
-
-    
-    useEffect(() => {
-
-        const url = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idFinal}/seats`
-
-        const promise = axios.get(url)
-
-        promise.then((res) => {
-          
-          console.log(res.data.day.date)
-         })
-          
-        promise.catch(err => console.log(err.response.data))
-
-    }, [])
 
     return (
         <PageContainer>

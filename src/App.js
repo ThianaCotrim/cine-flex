@@ -6,17 +6,13 @@ import SuccessPage from "./pages/SuccessPage/SuccessPage"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState } from "react"
 
-
 export default function App() {
-
 
     const [poltrona, setPoltrona] = useState([])
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState ("")
     const [fotoetexto, setFotoetexto] = useState()
     const [hora, setHora] = useState()
-   
-    
    
     
     return (
