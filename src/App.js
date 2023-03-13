@@ -13,6 +13,10 @@ export default function App() {
     const [poltrona, setPoltrona] = useState([])
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState ("")
+
+    const [fotoetexto, setFotoetexto] = useState()
+    const [hora, setHora] = useState()
+   
     
     return (
         <BrowserRouter>
@@ -27,7 +31,12 @@ export default function App() {
             nome={nome}
             setNome={setNome}
             cpf={cpf}
-            setCpf= {setCpf}/>}
+            setCpf= {setCpf}
+            fotoetexto={fotoetexto}
+            setFotoetexto={setFotoetexto}
+            hora={hora}
+            setHora={setHora}
+            />}
             />
             <Route path="/sucesso" element={<SuccessPage 
             poltrona={poltrona}
@@ -35,7 +44,12 @@ export default function App() {
             nome={nome}
             setNome={setNome}
             cpf={cpf}
-            setCpf= {setCpf}/>}/>
+            setCpf= {setCpf}
+            fotoetexto={fotoetexto}
+            setFotoetexto={setFotoetexto}
+            hora={hora}
+            setHora={setHora}
+          />}/>
             </Routes>
         </BrowserRouter>
     ) 

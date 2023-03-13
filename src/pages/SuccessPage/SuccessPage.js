@@ -4,7 +4,7 @@ import axios from "axios"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome}) {
+export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome, hora, fotoetexto}) {
 
     const navegate = useNavigate()
     const listaPoltrona = poltrona.map(assentos => {
@@ -19,13 +19,11 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
     }
 
     const [teste, setTeste] = useState()
-    const [testeDois, setTesteDois] = useState()
-    const [titulo, setTitulo] = useState()
+  
 
     const {idFinal} = useParams()
 
     
-
     useEffect(() => {
 
         const url = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idFinal}/seats`
@@ -33,9 +31,8 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
         const promise = axios.get(url)
 
         promise.then((res) => {
+            console.log(res.data)
            setTeste(res.data.day.date)
-           setTesteDois(res.data.name)
-           setTitulo(res.data.movie.title)
          })
           
         promise.catch(err => console.log(err.response.data))
@@ -47,8 +44,8 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
             <h1>Pedido feito <br /> com sucesso!</h1>
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
-                <p>{titulo}</p>
-                <p> {teste} - {testeDois}</p>
+                <p>{fotoetexto.title}</p>
+                <p> {teste} - {hora.name}</p>
             </TextContainer>
             <TextContainer data-test="seats-info">
                 <strong><p>Ingressos</p></strong>

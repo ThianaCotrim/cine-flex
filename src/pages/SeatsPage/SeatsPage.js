@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
+export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf, hora, setHora, fotoetexto, setFotoetexto}) {
 
     const [selecionado, setSelecionado] = useState([])
     const navigate = useNavigate()
@@ -47,8 +47,6 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
     }
 
     const [assentos, setAssentos] = useState ()
-    const [fotoetexto, setFotoetexto] = useState()
-    const [hora, setHora] = useState()
     const [dia, setDia] = useState()
 
     const {idSessao} = useParams()
