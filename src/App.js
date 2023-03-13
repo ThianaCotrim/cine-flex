@@ -29,7 +29,7 @@ export default function App() {
             cpf={cpf}
             setCpf= {setCpf}/>}
             />
-            <Route path="/sucesso/:idFinal" element={<SuccessPage 
+            <Route path="/sucesso" element={<SuccessPage 
             poltrona={poltrona}
             setPoltrona={setPoltrona}
             nome={nome}

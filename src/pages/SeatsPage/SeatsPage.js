@@ -33,13 +33,15 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
     } 
     }
 
-    function digitar (t) {
-        
-        const urlPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+    function reservar (t) {
         t.preventDefault();
+        const urlPost = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many"
+        
         const body = {ids: selecionado, name: nome, cpf: cpf};
 
+   
         const promise = axios.post(urlPost, body)
+      
         promise.then(res => navigate("/sucesso"))
         promise.catch(err => console.log(err.responde.data))
     }
@@ -62,7 +64,6 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
             setAssentos(res.data.seats)
             setHora(res.data)
             setDia(res.data.day)
-            console.log(res.data.seats)
         })
         promise.catch(err => console.log(err.response.data))
 
@@ -121,11 +122,11 @@ export default function SeatsPage({setPoltrona, setNome, setCpf, nome, cpf}) {
                     name="cpf"
                     id="cpf"
                     value={cpf}
-                    onChange={e => setCpf(e.target.value)}
+                    onChange={e => setCpf(e.target.value)}  
                     placeholder="Digite seu CPF..."/>
 
                 <Link to={`/sucesso/${hora.id}`}>
-                <button data-test="book-seat-btn" onClick={() => digitar} >Reservar Assento(s)</button>
+                <button data-test="book-seat-btn" onClick={reservar}>Reservar Assento(s)</button>
                 </Link>
                 </form>
             </FormContainer>

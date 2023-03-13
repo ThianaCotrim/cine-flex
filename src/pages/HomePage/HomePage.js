@@ -15,7 +15,6 @@ export default function HomePage() {
     const promisse = axios.get(url)
 
     promisse.then((res) => {
-        console.log(res.data)
         setImagens(res.data)
     })
     promisse.catch((err) => {

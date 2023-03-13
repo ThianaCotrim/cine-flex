@@ -24,6 +24,8 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
 
     const {idFinal} = useParams()
 
+    
+
     useEffect(() => {
 
         const url = `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idFinal}/seats`
