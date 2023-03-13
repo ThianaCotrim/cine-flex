@@ -16,7 +16,11 @@ export default function SessionsPage() {
     const promise = axios.get(url)
     
 
-    promise.then(res => (setSessao(res.data)) (setDias(res.data.days)))
+    promise.then(res => {
+        (setSessao(res.data))
+        (setDias(res.data.days))
+
+    }  )
     promise.catch(err => console.log(err.response.data))
   
    }, [])

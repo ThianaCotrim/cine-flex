@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, setNome, hora, fotoetexto}) {
 
@@ -18,7 +18,6 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
        setCpf ("")
     }
 
-    const [teste, setTeste] = useState()
   
 
     const {idFinal} = useParams()
@@ -31,8 +30,8 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
         const promise = axios.get(url)
 
         promise.then((res) => {
-            console.log(res.data)
-           setTeste(res.data.day.date)
+          
+          console.log(res.data.day.date)
          })
           
         promise.catch(err => console.log(err.response.data))
@@ -45,7 +44,7 @@ export default function SuccessPage({poltrona, setPoltrona, cpf, setCpf, nome, s
             <TextContainer data-test="movie-info">
                 <strong><p>Filme e sessão</p></strong>
                 <p>{fotoetexto.title}</p>
-                <p> {teste} - {hora.name}</p>
+                <p> {hora.day.date} - {hora.name}</p>
             </TextContainer>
             <TextContainer data-test="seats-info">
                 <strong><p>Ingressos</p></strong>

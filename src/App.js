@@ -13,9 +13,10 @@ export default function App() {
     const [poltrona, setPoltrona] = useState([])
     const [nome, setNome] = useState("")
     const [cpf, setCpf] = useState ("")
-
     const [fotoetexto, setFotoetexto] = useState()
     const [hora, setHora] = useState()
+   
+    
    
     
     return (
@@ -24,7 +25,8 @@ export default function App() {
 
             <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/sessoes/:idFilme" element={<SessionsPage />}/>
+            <Route path="/sessoes/:idFilme" element={<SessionsPage 
+            />}/>
             <Route path="/assentos/:idSessao" element={<SeatsPage 
             poltrona={poltrona}
             setPoltrona={setPoltrona}
@@ -49,6 +51,7 @@ export default function App() {
             setFotoetexto={setFotoetexto}
             hora={hora}
             setHora={setHora}
+            
           />}/>
             </Routes>
         </BrowserRouter>
